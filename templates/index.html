@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Cafés For remote Work</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
 
-</body>
+  <body>
+    <h1>Best Cafés</h1>
+    <!-- Using nested loop to get access to the dictionary keys and values -->
+    <h3>
+      {% for i in cafe_list %} {% for key, value in i.items() %}
+      <ul>
+        {% if key == 'Link' %}
+        <a href={{value}}>Click Here</a>
+        {% else %}
+        <li>{{key}}: {{value}}</li>
+        {% endif %}
+      </ul>
+      {% endfor %} <br /> {% endfor %}
+    </h3>
+    <!-- Function finished here -->
+  </body>
 </html>

@@ -1,0 +1,22 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #212529;
+}
+
+h1 {
+  color: #000000;
+  text-align: center;
+  padding: 20px;
+}
+
+ul {
+  display: inline-block; /* Remove the \n */
+  list-style-type: none; /* Remove the bullets */
+  margin-top: 5px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
