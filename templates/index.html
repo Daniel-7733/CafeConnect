@@ -16,17 +16,23 @@
   <body>
     <h1>Best Cafés</h1>
     <!-- Using nested loop to get access to the dictionary keys and values -->
-    <h3>
+    <h2>
+        <!--    Adding title    -->
+        {% for title in cafe_title %}
+        <ul><li> {{title}} </li></ul>
+        {% endfor %} <br />
+
+        <!--    Adding list of Cafés here    -->
       {% for i in cafe_list %} {% for key, value in i.items() %}
       <ul>
         {% if key == 'Link' %}
         <a href={{value}}>Click Here</a>
         {% else %}
-        <li>{{key}}: {{value}}</li>
+        <li>{{value}}</li>
         {% endif %}
       </ul>
       {% endfor %} <br /> {% endfor %}
-    </h3>
+    </h2>
     <!-- Function finished here -->
   </body>
 </html>

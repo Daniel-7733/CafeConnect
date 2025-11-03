@@ -4,16 +4,16 @@ from flask import Flask, render_template
 
 
 cafe: list[dict[str, str]] = [
-    {"Name": "Brewed Awakening", "Location": "E 1st Ave", "Wifi": "Yes", "Power": "Yes", "Link": "https://www.google.com/"},
+    {"Name": "Brewed Awakening", "Location": "E 1st Ave", "Wifi": "⚡ 📶Yes", "Power": "🔌Yes", "Link": "https://www.google.com/"},
     {"Name": "Java Junction", "Location": "Clark Dr", "Wifi": "Yes", "Power": "No", "Link": "https://www.google.com/"}
     ]
-
+cafe_titles: list[str] = [key for element in cafe for key, value in element.items()]
 
 app: Flask = Flask(__name__)
 
 @app.route("/")
 def index() -> str:
-    return render_template("index.html", cafe_list=cafe)
+    return render_template("index.html", cafe_list=cafe, cafe_title=cafe_titles)
 
 # Todo: Add function to store new good Cafés or Cafés
 # Todo: Get information from the database
