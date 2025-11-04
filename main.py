@@ -1,6 +1,26 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 
-"""Cafés should have Wifi & Power (A Electrical outlet for laptop, phone, or anything that charge with power)"""
+
+
+"""
+Cafés should have Wifi & Power 
+(A Electrical outlet for laptop, 
+phone, or anything that charge with power)
+"""
+
+
+
+db: SQLAlchemy = SQLAlchemy()
+app: Flask = Flask(__name__)
+
+class Cafe(db.Model):
+    id: int = db.Column(db.Integer, primary_key=True)
+    name: str = db.Column(db.Column(db.String(100), nullable=False))
+    location: str = db.Column(db.Column(db.String(100), nullable=False))
+    wifi: str = db.Column(db.Column(db.String(100), nullable=False))
+    power: str =db.Column(db.Column(db.String(100), nullable=False))
+    link: str =db.Column(db.Column(db.String(1000), nullable=False))
 
 
 cafe: list[dict[str, str]] = [
@@ -9,7 +29,6 @@ cafe: list[dict[str, str]] = [
     ]
 cafe_titles: list[str] = [key for element in cafe for key, value in element.items()]
 
-app: Flask = Flask(__name__)
 
 @app.route("/")
 def index() -> str:
