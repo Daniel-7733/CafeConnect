@@ -13,10 +13,16 @@ h1 {
   padding: 20px;
 }
 
-ul {
-  display: inline-block; /* Remove the \n */
-  list-style-type: none; /* Remove the bullets */
+p {
   margin-top: 5px;
   margin-right: 20px;
   margin-left: 10px;
+}
+
+.box {
+  width: 300px;
+  height: 500px;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 10px;
 }

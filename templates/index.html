@@ -15,24 +15,23 @@
 
   <body>
     <h1>Best Cafés</h1>
-    <!-- Using nested loop to get access to the dictionary keys and values -->
-    <h2>
-        <!--    Adding title    -->
-        {% for title in cafe_title %}
-        <ul><li> {{title}} </li></ul>
-        {% endfor %} <br />
+        <div class="outer-box">
+            <div class="box"> <!--Fo some reason the box is one; for both of cafés -->
+                <!--    Adding list of Cafés here    -->
+              {% for i in cafe_list %} {% for key, value in i.items() %}
 
-        <!--    Adding list of Cafés here    -->
-      {% for i in cafe_list %} {% for key, value in i.items() %}
-      <ul>
-        {% if key == 'Link' %}
-        <a href={{value}}>Click Here</a>
-        {% else %}
-        <li>{{value}}</li>
-        {% endif %}
-      </ul>
-      {% endfor %} <br /> {% endfor %}
-    </h2>
+                {% if key == 'Link' %}
+                <a href={{value}} class="web-link">Click Here</a>
+                {% else %}
+                    {% if key == 'Name' %}
+                    <p class="title">{{value}}</p>
+                    {% else %}
+                    <p class="options">{{key}} {{value}}</p>
+                    {% endif %}
+                {% endif %}
+              {% endfor %} <br /> {% endfor %}
+            </div>
+        </div>
     <!-- Function finished here -->
   </body>
 </html>
