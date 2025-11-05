@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Best Cafés For remote Work</title>
 
-      <!-- Favicon: https://www.flaticon.com/free-icon/stack-of-books_5832416?term=book&page=1&position=3&origin=search&related_id=5832416-->
-    <link rel="icon" type="image/x-icon" href="static\images\coffee.png"> <!-- Adding a favicon to my website tab header -->
+    <!-- Favicon: https://www.flaticon.com/free-icon/stack-of-books_5832416?term=book&page=1&position=3&origin=search&related_id=5832416-->
+    <link rel="icon" type="image/x-icon" href="static\images\coffee.png" />
+    <!-- Adding a favicon to my website tab header -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/main.css') }}"
@@ -15,23 +16,21 @@
 
   <body>
     <h1>Best Cafés</h1>
-        <div class="outer-box">
-            <div class="box"> <!--Fo some reason the box is one; for both of cafés -->
-                <!--    Adding list of Cafés here    -->
-              {% for i in cafe_list %} {% for key, value in i.items() %}
-
-                {% if key == 'Link' %}
-                <a href={{value}} class="web-link">Click Here</a>
-                {% else %}
-                    {% if key == 'Name' %}
-                    <p class="title">{{value}}</p>
-                    {% else %}
-                    <p class="options">{{key}} {{value}}</p>
-                    {% endif %}
-                {% endif %}
-              {% endfor %} <br /> {% endfor %}
-            </div>
-        </div>
+    <!--Fo some reason the box is one; for both of cafés -->
+    <!--    Adding list of Cafés here    -->
+    {% for i in cafe_list %}
+    <div class="outer-box">
+      <div class="box">
+        {% for key, value in i.items() %} {% if key == 'Link' %}
+        <a href="{{value}}" class="web-link">Click Here</a>
+        {% else %} {% if key == 'Name' %}
+        <p class="title">{{value}}</p>
+        {% else %}
+        <p class="options">{{key}} {{value}}</p>
+        {% endif %} {% endif %} {% endfor %} <br />
+      </div>
+    </div>
+    {% endfor %}
     <!-- Function finished here -->
   </body>
 </html>
