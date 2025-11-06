@@ -1,46 +1,76 @@
-
+/* ---------- Global Styles ---------- */
 body {
   font-family: Arial, sans-serif;
-  background-color: #E8D8B0; /* Espresso Elegance - Link: https://piktochart.com/tips/coffee-shop-color-palette */
+  background-color: #e8d8b0; /* Espresso Elegance palette */
   margin: 0;
   padding: 0;
   color: #212529;
 }
 
 h1 {
-  color: #000000;
   text-align: center;
   padding: 20px;
+  color: #000;
 }
 
-p {
-  margin-top: 5px;
-  text-align: center;
-  margin-right: 20px;
-  margin-left: 10px;
-}
-
-
-a {
-  margin-top: 5px;
-  text-align: center;
-  margin-right: 20px;
-  margin-left: 10px;
-}
-
-p .title {  /* This line doesn't change the out put*/
-  font-style: bold;
-  display: block;
-  margin-top: 5px;
-  text-align: center;
-  margin-right: 20px;
-  margin-left: 10px;
-}
-
-.box {
-  width: 300px;
-  height: 400px;
-  border: 2px solid black;
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   padding: 10px;
-  margin: 10px;
+}
+
+/* ---------- Café Card ---------- */
+.cafe-card {
+  width: 280px;
+  border: 2px solid #3e2723;
+  border-radius: 8px;
+  background-color: #fff8e7;
+  padding: 15px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.cafe-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ---------- Text Styling ---------- */
+.cafe-name {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #3e2723;
+}
+
+.cafe-location {
+  font-style: italic;
+  text-align: center;
+  font-size: large;
+  margin: 5px 0;
+  color: #5d4037;
+}
+
+.cafe-detail {
+  font-style: normal;
+  margin: 5px 0;
+  color: #5d4037;
+}
+
+/* ---------- Link Styling ---------- */
+.cafe-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #6f4e37;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.cafe-link:hover {
+  background-color: #8b5e3c;
 }

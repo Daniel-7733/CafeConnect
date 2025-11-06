@@ -38,12 +38,18 @@ class Cafe(db.Model):
 
 
 cafe: list[dict[str, str]] = [
+    # These are just example and may not have any power and internet however cafés does exist.
     {"Name": "Brewed Awakening", "Location": "E 1st Ave", "Wifi": "📶", "Power": "🔌", "Link": "https://www.brewedawakening.com/"},
-    {"Name": "cafe Medina", "Location": "Clark Dr", "Wifi": "📶", "Power": "🔌", "Link": "https://www.medinacafe.com/"}
+    {"Name": "cafe Medina", "Location": "Clark Dr", "Wifi": "📶", "Power": "🔌", "Link": "https://www.medinacafe.com/"},
+    {"Name": "Kennington Lane Cafe", "Location": "Londen", "Wifi": "📶", "Power": "🔌", "Link": "https://cafekenningtonlane.co.uk/"},
+    {"Name": "Sheila's Cafe", "Location": "Londen", "Wifi": "📶", "Power": "🔌", "Link": "https://sheilas.cafe/"},
+    {"Name": "cafe Medina", "Location": "Clark Dr", "Wifi": "📶", "Power": "🔌", "Link": "https://www.medinacafe.com/"},
+    {"Name": "PROJECT68", "Location": "London (near King’s Cross / Russell Square)", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendlycafe.com/cafes/london/project68"},
+    {"Name": "Caffe Mira", "Location": "3136 Main St, Vancouver BC, Canada", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendlycafe.com/cafes/vancouver/caffe-mira"},
+    {"Name": "AVIK Cafe", "Location": "Vancouver BC, Canada", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendlycafe.com/cafes/vancouver/avik"},
+    {"Name": "Café Z Bar", "Location": "58 Stoke Newington High St, London N16 7PB", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendly.co/london/cafe-z-bar"},
+    {"Name": "Basecamp Coffee Shop", "Location": "Seattle, WA, USA", "Wifi": "📶", "Power": "🔌", "Link": "https://awifiplace.com/cafes/basecamp-coffee-shop-seattle"}
     ]
-
-# cafe_titles: set[str] = set([key for element in cafe for key, value in element.items()])
-
 
 @app.route("/")
 def index() -> str:
