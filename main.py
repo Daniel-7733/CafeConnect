@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from os import path, makedirs
 
@@ -34,7 +34,7 @@ class Cafe(db.Model):
     location: str = db.Column(db.String(100), nullable=False)
     wifi: str = db.Column(db.String(100), nullable=False)
     power: str = db.Column(db.String(100), nullable=False)
-    link: str = db.Column(db.String(500), nullable=False)
+    link: str = db.Column(db.String(1000), nullable=False)
 
 
 cafe: list[dict[str, str]] = [
@@ -55,8 +55,38 @@ cafe: list[dict[str, str]] = [
 def index() -> str:
     return render_template("index.html", cafe_list=cafe)
 
-# Todo: Add function to store new good Cafés or Cafés
-# Todo: Get information from the database
+
+@app.route("/show-all-cafe")
+def show_all() -> str:
+    cafes: list[Cafe] = Cafe.query.all()
+    return render_template("cafeAdmin.html", cafes=cafes)
+
+
+@app.route("/add-cafe", methods=["GET", "POST"])
+def add_all() -> str:
+    if request.method == "POST":
+        name = request.form["name"]
+        location = request.form["location"]
+        wifi = request.form["wifi"]
+        power = request.form["power"]
+        link = request.form["link"]
+
+        cafe_info: Cafe = Cafe(
+            name=name,
+            location=location,
+            wifi=wifi,
+            power=power,
+            link=link
+        )
+        db.session.add(cafe_info)
+        db.session.commit()
+        flash("Cafe Successfully add it.", "error") # it is not implemented in html yet
+    else:
+        flash("Fail to add.", "error")
+    return render_template("cafeAdmin.html")
+
+
+
 # Todo: (Maybe) getting more dynamic program that get all good Cafés base on user ip address.
 
 if __name__ == "__main__":
