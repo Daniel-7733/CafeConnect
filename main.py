@@ -65,11 +65,11 @@ def show_all() -> str:
 @app.route("/add-cafe", methods=["GET", "POST"])
 def add_all() -> str:
     if request.method == "POST":
-        name = request.form["name"]
-        location = request.form["location"]
-        wifi = request.form["wifi"]
-        power = request.form["power"]
-        link = request.form["link"]
+        name: str = request.form["name"]
+        location: str = request.form["location"]
+        wifi: str = request.form["wifi"]
+        power: str = request.form["power"]
+        link: str = request.form["link"]
 
         cafe_info: Cafe = Cafe(
             name=name,
@@ -78,11 +78,13 @@ def add_all() -> str:
             power=power,
             link=link
         )
+
         db.session.add(cafe_info)
         db.session.commit()
         flash("Cafe Successfully add it.", "error") # it is not implemented in html yet
     else:
         flash("Fail to add.", "error")
+
     return render_template("cafeAdmin.html")
 
 
