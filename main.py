@@ -87,9 +87,5 @@ def add_all() -> str:
 
     return render_template("cafeAdmin.html")
 
-
-
-# Todo: (Maybe) getting more dynamic program that get all good Cafés base on user ip address.
-
 if __name__ == "__main__":
     app.run(debug=True)

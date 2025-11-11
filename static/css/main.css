@@ -74,3 +74,53 @@ main {
 .cafe-link:hover {
   background-color: #8b5e3c;
 }
+
+.cafe-details {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.form-box {
+  width: 320px;
+  border: 2px solid #3e2723;
+  border-radius: 10px;
+  background-color: #fff8e7;
+  padding: 25px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-box label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  color: #3e2723;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.form-box button { /* Button need to be on the right side */
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  color: #3e2723;
+}
+
+.button:hover {  /* This one isn't working */
+ background-color: #8b5e3c;
+}
+
+
