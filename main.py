@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, Response, url_for
 from flask_sqlalchemy import SQLAlchemy
 from os import path, makedirs
 
@@ -63,15 +63,26 @@ def show_all() -> str:
 
 
 @app.route("/add-cafe", methods=["GET", "POST"])
-def add_all() -> str:
+def add_all() -> str | Response:
     if request.method == "POST":
-        name: str = request.form["name"]
-        location: str = request.form["location"]
-        wifi: str = request.form["wifi"]
-        power: str = request.form["power"]
-        link: str = request.form["link"]
+        name = request.form["name"]
+        location = request.form["location"]
+        link = request.form["link"]
 
-        cafe_info: Cafe = Cafe(
+        wifi = ""
+        power = ""
+
+        if request.form["wifi"] == "Yes":
+            wifi = "📶"
+        else:
+            flash("It should have Wi-Fi", "error")
+
+        if request.form["power"] == "Yes":
+            power = "🔌"
+        else:
+            flash("It should have Electrical outlet", "error")
+
+        cafe_info = Cafe(
             name=name,
             location=location,
             wifi=wifi,
@@ -81,11 +92,11 @@ def add_all() -> str:
 
         db.session.add(cafe_info)
         db.session.commit()
-        flash("Cafe Successfully add it.", "error") # it is not implemented in html yet
+        flash("Cafe Successfully added.", "success")
+        return redirect(url_for("show_all"))
     else:
-        flash("Fail to add.", "error")
+        return render_template("cafeAdmin.html")
 
-    return render_template("cafeAdmin.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

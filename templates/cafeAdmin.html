@@ -21,24 +21,24 @@
       <h1>Add Best Cafés for Remote Work</h1>
     </header>
 
-    <form class="cafe-details">
+    <form class="cafe-details" action="{{ url_for('add_all') }}" method="POST">
       <div class="form-box">
         <label for="name">Name:</label>
-        <input type="text" id="name" value="Cafe name">
+        <input type="text" id="name" name="name" placeholder="Cafe name" required>
 
         <label for="location">Location:</label>
-        <input type="text" id="location" value="New York">
+        <input type="text" id="location" name="location" placeholder="New York" required>
 
         <label for="wifi">Wi-Fi:</label>
-        <input type="text" id="wifi" value="Yes">
+        <input type="text" id="wifi" name="wifi" placeholder="Yes" required>
 
         <label for="power">Electrical outlet:</label>
-        <input type="text" id="power" value="Yes">
+        <input type="text" id="power" name="power" placeholder="Yes" required>
 
         <label for="link">Link:</label>
-        <input type="text" id="link" value="https//...">
+        <input type="url" id="link" name="link" placeholder="https://..." required>
 
-        <button type="button" class="button">Save</button>
+        <button type="submit">Save</button>
       </div>
     </form>
 
