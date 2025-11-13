@@ -10,7 +10,6 @@ phone, or anything that charge with power)
 """
 
 
-
 db: SQLAlchemy = SQLAlchemy()
 app: Flask = Flask(__name__)
 
@@ -18,17 +17,14 @@ app: Flask = Flask(__name__)
 app.config["SECRET_KEY"] = "dev-secret"
 
 makedirs(app.instance_path, exist_ok=True)
-db_path: str = path.join(app.instance_path, "book.db")
+db_path: str = path.join(app.instance_path, "cafe.db")
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-db.init_app(app)
-with app.app_context():
-    db.create_all()
-
-
 class Cafe(db.Model):
+    __tablename__ = "cafe"
+
     id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(100), nullable=False)
     location: str = db.Column(db.String(100), nullable=False)
@@ -37,50 +33,48 @@ class Cafe(db.Model):
     link: str = db.Column(db.String(1000), nullable=False)
 
 
-cafe: list[dict[str, str]] = [
-    # These are just example and may not have any power and internet however cafés does exist.
-    {"Name": "Brewed Awakening", "Location": "E 1st Ave", "Wifi": "📶", "Power": "🔌", "Link": "https://www.brewedawakening.com/"},
-    {"Name": "cafe Medina", "Location": "Clark Dr", "Wifi": "📶", "Power": "🔌", "Link": "https://www.medinacafe.com/"},
-    {"Name": "Kennington Lane Cafe", "Location": "Londen", "Wifi": "📶", "Power": "🔌", "Link": "https://cafekenningtonlane.co.uk/"},
-    {"Name": "Sheila's Cafe", "Location": "Londen", "Wifi": "📶", "Power": "🔌", "Link": "https://sheilas.cafe/"},
-    {"Name": "cafe Medina", "Location": "Clark Dr", "Wifi": "📶", "Power": "🔌", "Link": "https://www.medinacafe.com/"},
-    {"Name": "PROJECT68", "Location": "London (near King’s Cross / Russell Square)", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendlycafe.com/cafes/london/project68"},
-    {"Name": "Caffe Mira", "Location": "3136 Main St, Vancouver BC, Canada", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendlycafe.com/cafes/vancouver/caffe-mira"},
-    {"Name": "AVIK Cafe", "Location": "Vancouver BC, Canada", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendlycafe.com/cafes/vancouver/avik"},
-    {"Name": "Café Z Bar", "Location": "58 Stoke Newington High St, London N16 7PB", "Wifi": "📶", "Power": "🔌", "Link": "https://laptopfriendly.co/london/cafe-z-bar"},
-    {"Name": "Basecamp Coffee Shop", "Location": "Seattle, WA, USA", "Wifi": "📶", "Power": "🔌", "Link": "https://awifiplace.com/cafes/basecamp-coffee-shop-seattle"}
-    ]
+db.init_app(app)
+with app.app_context():
+    db.create_all()
+
 
 @app.route("/")
 def index() -> str:
+    """
+    Load main page in html & show all the cafe.
+
+    :return: (str) index.html
+    """
+
+    cafe: list[Cafe] = Cafe.query.all()
     return render_template("index.html", cafe_list=cafe)
-
-
-@app.route("/show-all-cafe")
-def show_all() -> str:
-    cafes: list[Cafe] = Cafe.query.all()
-    return render_template("cafeAdmin.html", cafes=cafes)
 
 
 @app.route("/add-cafe", methods=["GET", "POST"])
 def add_all() -> str | Response:
+    """
+    Load the second page for adding cafe in to the database.
+
+    :return: (str | Response) cafeAdmin.html.
+    """
+
     if request.method == "POST":
-        name = request.form["name"]
-        location = request.form["location"]
-        link = request.form["link"]
+        name: str = request.form["name"]
+        location: str = request.form["location"]
+        link: str = request.form["link"]
 
-        wifi = ""
-        power = ""
+        wifi: str = ""
+        power: str = ""
 
-        if request.form["wifi"] == "Yes":
+        if request.form["wifi"].lower() == "yes":
             wifi = "📶"
         else:
-            flash("It should have Wi-Fi", "error")
+            flash("It should have Wi-Fi", "error") # this part need to be add in html
 
-        if request.form["power"] == "Yes":
+        if request.form["power"].lower() == "yes":
             power = "🔌"
         else:
-            flash("It should have Electrical outlet", "error")
+            power = "🔋"
 
         cafe_info = Cafe(
             name=name,
@@ -93,7 +87,7 @@ def add_all() -> str | Response:
         db.session.add(cafe_info)
         db.session.commit()
         flash("Cafe Successfully added.", "success")
-        return redirect(url_for("show_all"))
+        return redirect(url_for("index"))
     else:
         return render_template("cafeAdmin.html")
 

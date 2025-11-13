@@ -107,7 +107,8 @@ main {
   box-sizing: border-box;
 }
 
-.form-box button { /* Button need to be on the right side */
+.form-box button {
+  /* Button need to be on the right side */
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 8px;
@@ -119,8 +120,7 @@ main {
   color: #3e2723;
 }
 
-.button:hover {  /* This one isn't working */
- background-color: #8b5e3c;
+.button:hover {
+  /* This one isn't working */
+  background-color: #8b5e3c;
 }
-
-

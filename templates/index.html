@@ -23,22 +23,18 @@
     <main>
       {% for cafe in cafe_list %}
       <article class="cafe-card">
-        {% for key, value in cafe.items() %} {% if key == 'Link' %}
+        <h2 class="cafe-name">{{ cafe.name }}</h2>
+        <h3 class="cafe-location">{{ cafe.location }}</h3>
+        <p class="cafe-detail"><strong>Wifi:</strong> {{ cafe.wifi }}</p>
+        <p class="cafe-detail"><strong>Power:</strong> {{ cafe.power }}</p>
         <a
-          href="{{ value }}"
+          href="{{ cafe.link }}"
           class="cafe-link"
           target="_blank"
           rel="noopener noreferrer"
         >
           Visit Website
         </a>
-        {% elif key == 'Name' %}
-        <h2 class="cafe-name">{{ value }}</h2>
-        {% elif key == 'Location' %}
-        <h2 class="cafe-location">{{ value }}</h2>
-        {% else %}
-        <p class="cafe-detail"><strong>{{ key }}:</strong> {{ value }}</p>
-        {% endif %} {% endfor %}
       </article>
       {% endfor %}
     </main>
