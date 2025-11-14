@@ -50,8 +50,16 @@ def index() -> str:
     return render_template("index.html", cafe_list=cafe)
 
 
+def is_it_same(link: str) -> bool:
+    """
+    Check if data exist in database.
+
+    :return: (bool) True if data exist otherwise false
+    """
+    return db.session.query(Cafe).filter_by(link=link).first() is not None
+
 @app.route("/add-cafe", methods=["GET", "POST"])
-def add_all() -> str | Response:
+def add_all() -> Response | str:
     """
     Load the second page for adding cafe in to the database.
 
@@ -63,31 +71,24 @@ def add_all() -> str | Response:
         location: str = request.form["location"]
         link: str = request.form["link"]
 
-        wifi: str = ""
-        power: str = ""
+        check: bool = is_it_same(link=link)
 
-        if request.form["wifi"].lower() == "yes":
-            wifi = "📶"
+        if check:
+            flash("Same Cafe", "error")
+            return redirect(url_for("add_all"))
         else:
-            flash("It should have Wi-Fi", "error") # this part need to be add in html
+            cafe_info = Cafe(
+                name=name,
+                location=location,
+                wifi="📶",
+                power="🔋",
+                link=link
+            )
 
-        if request.form["power"].lower() == "yes":
-            power = "🔌"
-        else:
-            power = "🔋"
-
-        cafe_info = Cafe(
-            name=name,
-            location=location,
-            wifi=wifi,
-            power=power,
-            link=link
-        )
-
-        db.session.add(cafe_info)
-        db.session.commit()
-        flash("Cafe Successfully added.", "success")
-        return redirect(url_for("index"))
+            db.session.add(cafe_info)
+            db.session.commit()
+            flash("Cafe Successfully added.", "success")
+            return redirect(url_for("index"))
     else:
         return render_template("cafeAdmin.html")
 

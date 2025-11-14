@@ -120,7 +120,25 @@ main {
   color: #3e2723;
 }
 
-.button:hover {
-  /* This one isn't working */
-  background-color: #8b5e3c;
+/* ---------- flash massage Styling ---------- */
+.flash-messages {
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.flash {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.flash.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash.error {
+  background-color: #f8d7da;
+  color: #721c24;
 }

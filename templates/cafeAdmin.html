@@ -20,6 +20,15 @@
       <h1>Add Best Cafés for Remote Work</h1>
     </header>
 
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
     <form class="cafe-details" action="{{ url_for('add_all') }}" method="POST">
       <div class="form-box">
         <label for="name">Name:</label>
@@ -39,12 +48,6 @@
           placeholder="New York"
           required
         />
-
-        <label for="wifi">Wi-Fi:</label>
-        <input type="text" id="wifi" name="wifi" placeholder="Yes" required />
-
-        <label for="power">Electrical outlet:</label>
-        <input type="text" id="power" name="power" placeholder="Yes" required />
 
         <label for="link">Link:</label>
         <input
